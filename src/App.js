@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Nav } from './components/nav'
+import { Nav } from './components/Nav'
 import { ListUsersContainer } from './containers/ListUsersContainer/'
 import { CreateUsersContainer } from './containers/CreateUsersContainer/'
 
