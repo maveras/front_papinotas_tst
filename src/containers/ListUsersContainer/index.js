@@ -1,55 +1,46 @@
 import React, { useState } from 'react'
-
 import { UserCard } from '../../components/UserCard'
 import { ListUserContainer } from './styles'
-export const ListUsersContainer = () => {
-  // const [users, setusers] = useState([])
-  const users = [
-    {
-      rut: '153323-8',
-      name: 'Marcelo',
-      lastName: 'vera',
-      prescence: false,
-      n_list: '2'
-    },
-    {
-      rut: '15332aa3-8',
-      name: 'Susana',
-      lastName: 'Ardiles',
-      prescence: true,
-      n_list: '4'
-    },
-    {
-      rut: '15332aa3-8',
-      name: 'Susana',
-      lastName: 'Ardiles',
-      prescence: true,
-      n_list: '4'
-    },
-    {
-      rut: '15332aa3-8',
-      name: 'Susana',
-      lastName: 'Ardiles',
-      prescence: true,
-      n_list: '4'
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+
+const USERS_QUERY = gql`
+  query {
+    users {
+      rut,
+      lastName,
+      name,
+      nList,
+      prescense,
+      rut
     }
-  ]
-  return (
-    <ListUserContainer>
-      <h3>Users List</h3>
-      <div className="user-list">
-        {
-          users.map(user => (
-            <UserCard
-              rut = {user.rut}
-              lastName = {user.lastName}
-              userName={user.name}
-              nlist={user.n_list}
-              prescence={user.prescence}
-              key={user.rut}/>
-         ))
-        }
-      </div>
-    </ListUserContainer>
-  )
-}
+  }
+`;
+
+export const ListUsersContainer = () => (
+  <Query query={USERS_QUERY}>
+    {({ loading, error, data }) => {
+      console.log('la data', data)
+      if (loading) return (<div>Loading...</div>)
+      if (error) return (<div>Error!</div>)
+      return (
+        <ListUserContainer>
+          <h3>Users List</h3>
+          <div className="user-list">
+            {
+              data.users.map(user => (
+                <UserCard
+                  rut = {user.rut}
+                  lastName = {user.lastName}
+                  userName={user.name}
+                  nlist={user.n_list}
+                  prescence={user.prescence}
+                  key={user.rut}/>
+              ))
+            }
+          </div>
+        </ListUserContainer>
+      )
+    }}
+  </Query>
+)
