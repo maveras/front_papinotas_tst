@@ -27,7 +27,7 @@ export const CardDetail = styled.div`
   }
 `
 export const CardAction = styled.div`
-  background: ${props => props.prescence ? "#1CBC61" : "#E74C3C"};
+  background: ${props => props.prescense ? "#1CBC61" : "#E74C3C"};
   padding: 1rem 2rem;
   color: white;
   font-size: 1.5rem;

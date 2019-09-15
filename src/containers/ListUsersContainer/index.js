@@ -12,15 +12,22 @@ const USERS_QUERY = gql`
       name,
       nList,
       prescense,
-      rut
+      rut,
+      id
     }
   }
 `;
-
+const updateUsers = (cache, { data: { changePrescence } }) => {
+    console.log('el cache', cache)
+    const { users } = cache.readQuery({ query: USERS_QUERY });
+    cache.writeQuery({
+      query: USERS_QUERY,
+      data: { users: users.concat([changePrescence.user]) },
+    });
+  }
 export const ListUsersContainer = () => (
   <Query query={USERS_QUERY}>
     {({ loading, error, data }) => {
-      console.log('la data', data)
       if (loading) return (<div>Loading...</div>)
       if (error) return (<div>Error!</div>)
       return (
@@ -30,12 +37,15 @@ export const ListUsersContainer = () => (
             {
               data.users.map(user => (
                 <UserCard
+                  id = {user.id}
                   rut = {user.rut}
                   lastName = {user.lastName}
                   userName={user.name}
-                  nlist={user.n_list}
-                  prescence={user.prescence}
-                  key={user.rut}/>
+                  nlist={user.nList}
+                  prescense={user.prescense}
+                  key={user.id}
+                  onChangePrescence= {updateUsers}
+                  />
               ))
             }
           </div>

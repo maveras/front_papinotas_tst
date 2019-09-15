@@ -10,10 +10,10 @@ export const Nav = () => (
     </Brand>
     <List>
       <Link to='/'>
-        <Item >List Users</Item>
+        <Item >Listar Usuarios</Item>
       </Link>
       <Link to='/createUser'>
-        <Item >Create Users</Item>
+        <Item >Crear Usuarios</Item>
       </Link>
     </List>
   </NavBar>

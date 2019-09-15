@@ -11,7 +11,8 @@ function App() {
       <BrowserRouter>
         <Nav/>
         <Switch>
-          <Route exact path='/' component={ListUsersContainer} />
+          {/* <Route exact path='/' component={ListUsersContainer} /> */}
+          <Route exact path='/' component={ ListUsersContainer } />
           <Route exact path='/createUser' component={CreateUsersContainer} />
         </Switch>
       </BrowserRouter>
